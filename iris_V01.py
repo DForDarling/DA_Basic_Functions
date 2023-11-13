@@ -27,5 +27,8 @@ read_data.columns = column_names
 
 CT_obj = CT()
 
-list1 = read_data["SepalLength_in_cm"].tolist()
-CT_obj.describe(list1, class_interval=0.5, roundVal=3)
+for i in column_names[:-1]:
+    print("Description of ", i, " column")
+    list1 = read_data[i].tolist()
+    CT_obj.describe(list1, class_interval=0.5, roundVal=3)
+    print()
