@@ -5,8 +5,8 @@ class centralTendancy:
         print('Mean', self.mean(list1, roundVal))
         print('Median', self.median(list1))
         print('Mode', self.mode(list1, class_interval))
-        print('Standard Deviation', self.stdDev(list1, roundVal))
-        print('Variance', self.variance(list1, roundVal))
+        # print('Standard Deviation', self.stdDev(list1, roundVal))
+        # print('Variance', self.variance(list1, roundVal))
     
     
     # mean function
@@ -15,7 +15,7 @@ class centralTendancy:
         meanVal = round(meanVal, roundVal) if roundVal != 0 else meanVal
         return meanVal
 
-
+    # median function
     def median(self, list1):
         list1.sort()
         n = len(list1)
@@ -24,7 +24,7 @@ class centralTendancy:
             return (list1[int((n/2))-1] + list1[int((n/2))])/2         
         return list1[int((n-1))/2]
     
-    
+    # mode function: To find the occurence
     def mode(self, list1, class_interval = 0):
         maxData = max(list1)
         minData = min(list1)
@@ -43,14 +43,22 @@ class centralTendancy:
                     dicn[j] += 1
                     break
                 
-        modFreq, modalClass = 0, 0
-        for i in dicnKey:
+        modFreq, modalClass, modalClassPosition = 0, (0, 0), 0
+        for ind, i in enumerate(dicnKey):
             if dicn[i] > modFreq:
                 modFreq = dicn[i]
                 modalClass = i
-        return modalClass
+                modalClassPosition = ind
 
+        mode = (modalClass[0]) + ((modFreq - dicn[dicnKey[modalClassPosition-1]]) / ((2*modFreq)-dicn[dicnKey[modalClassPosition-1]]-dicn[dicnKey[modalClassPosition+1]])) * (modalClass[1]- modalClass[0])
+        return mode
 
+class spread:
+    def describe(self,list1,roundVal=0):
+        print("Standard Deviation", self.stdDev(list1,roundVal))
+        print("Variance", self.variance(list1,roundVal))
+    
+    
     def variance(self, list1, roundVal = 0):
         list_mean = sum(list1)/len(list1)
         list_sum_mean_diff_sq = 0
@@ -73,3 +81,44 @@ class centralTendancy:
         stdDev = (list_sum_mean_diff_sq/len(list1)) ** 0.5
         stdDev = round(stdDev, roundVal) if roundVal != 0 else stdDev
         return stdDev
+   
+    
+   
+    
+   
+    
+   
+    
+   
+    
+   
+    
+   
+    
+   
+    
+   
+    
+   
+    # def variance(self, list1, roundVal = 0):
+    #     list_mean = sum(list1)/len(list1)
+    #     list_sum_mean_diff_sq = 0
+        
+    #     for i in list1:
+    #         list_sum_mean_diff_sq += (list_mean - i) ** 2
+            
+    #     var = (list_sum_mean_diff_sq/len(list1)) 
+    #     var = round(var, roundVal) if roundVal != 0 else var
+    #     return var
+    
+    
+    # def stdDev(self, list1, roundVal = 0):  
+    #     list_mean = sum(list1)/len(list1)
+    #     list_sum_mean_diff_sq = 0
+        
+    #     for i in list1:
+    #         list_sum_mean_diff_sq += (list_mean - i) ** 2
+            
+    #     stdDev = (list_sum_mean_diff_sq/len(list1)) ** 0.5
+    #     stdDev = round(stdDev, roundVal) if roundVal != 0 else stdDev
+    #     return stdDev
